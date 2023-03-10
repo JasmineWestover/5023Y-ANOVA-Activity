@@ -10,6 +10,7 @@ library(here)
 # IMPORT DATA ----
 
 frogs <- read_csv(here("data","frogs_messy_data.csv"))  # don't even necessarily need the here function or package 
+#___________________________----
 
 # BACKGROUND OF EXPERIMENT ----
 
@@ -27,6 +28,23 @@ frogs <- read_csv(here("data","frogs_messy_data.csv"))  # don't even necessarily
 # We want to compare the means of 3 independent groups (13°C, 18°C and 25°C temperature groups) and we have one continuous response variable (hatching time in days) and one categorical explanatory variable (temperature). 
     # One-way ANOVA would be the appropriate analysis. 
 
+#___________________________----
+
+
 # HYPOTHESIS ----
 # Before the analysis of the data starts, a hypothesis and a prediction should be made. 
 # Frogspawn takes around 2-3 weeks to hatch under optimal temperatures (15-20°C), can hypothesize that the lower the temperature, the longer it will take for frogspawn to hatch. Based on our temperature range can predict that at the highest temperature (25°C) hatching time will be reduced.
+## Hypothesis = mean frogspawn hatching time will vary with temperature level ----
+
+#___________________________----
+
+# TIDY DATA ----
+glimpse(frogs)
+frogs <- janitor::clean_names(frogs)
+summary(frogs)
+# the data is not in a tidy format so need to 'manipulate' but NOT change the data so it is in a tidy format. 
+# need to remove the unavailable values (na)
+# Potentially change the variable names 
+# Need to pivot the data, as currently in a wide format but we want it in a long format, where every row is a unique observation and the columns are the variables (temperature & days hatching)
+  # Once the data is pivoted into a long format it would be tidy. 
+
