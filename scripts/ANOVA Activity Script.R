@@ -82,4 +82,3 @@ performance::check_model(lsmodel_frogs1,
 #___________________________----
 
 # PLOT ----
-
