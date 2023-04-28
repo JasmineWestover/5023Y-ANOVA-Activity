@@ -71,3 +71,15 @@ anova(lsmodel_frogs1)
 broom::tidy(lsmodel_frogs1, conf.int = T)
 
 #___________________________----
+
+# ASSUMPTIONS ---
+
+plot(lsmodel_frogs1)  # Base R
+
+performance::check_model(lsmodel_frogs1,
+                         check = c("qq", "outliers", "homogeneity")) # Tidyverse
+
+#___________________________----
+
+# PLOT ----
+
