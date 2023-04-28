@@ -39,12 +39,35 @@ frogs <- read_csv(here("data","frogs_messy_data.csv"))  # don't even necessarily
 #___________________________----
 
 # TIDY DATA ----
+
 glimpse(frogs)
 frogs <- janitor::clean_names(frogs)
 summary(frogs)
+
 # the data is not in a tidy format so need to 'manipulate' but NOT change the data so it is in a tidy format. 
 # need to remove the unavailable values (na)
 # Potentially change the variable names 
 # Need to pivot the data, as currently in a wide format but we want it in a long format, where every row is a unique observation and the columns are the variables (temperature & days hatching)
   # Once the data is pivoted into a long format it would be tidy. 
+# Can make frogs into a new object, so the data is the same throughout, in the tidy format. 
 
+frogs <- frogs %>% 
+  rename("13" = temperature13,
+         "18" = temperature18,
+         "25" = temperature25,
+         frogspawn_id = `frogspawn_sample_id`) %>% 
+  pivot_longer(`13`:`25`, names_to="temperature", values_to="days") %>% 
+  drop_na(days)
+
+#___________________________----
+
+# ANALYSIS ----
+
+lsmodel_frogs1 <- lm(days ~ temperature, data = frogs)
+
+summary(lsmodel_frogs1)
+anova(lsmodel_frogs1)
+
+broom::tidy(lsmodel_frogs1, conf.int = T)
+
+#___________________________----
